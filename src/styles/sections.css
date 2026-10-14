@@ -147,15 +147,11 @@
   white-space: nowrap;
 }
 
-.cert-block {
-  margin-top: 3rem;
-}
-
 .cert-list {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin: 0;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  margin: 4rem 0 0;
   padding: 0;
   list-style: none;
 }
@@ -168,30 +164,60 @@
 
 .cert-card {
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.25rem 1.5rem;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.75rem;
   border-radius: 0.75rem;
+}
+
+.cert-badge {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  border: 1px solid #333;
+  background: #1c1c21;
+  color: #d9ecff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.cert-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
 }
 
 .cert-card p {
   margin: 0;
 }
 
+.cert-issuer {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #839cb5;
+}
+
 .cert-name {
+  font-size: 1.25rem;
   font-weight: 600;
   color: #fff;
 }
 
-.cert-issuer {
-  font-size: 0.9rem;
-  color: #839cb5;
-}
-
 .cert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   width: fit-content;
-  margin-top: 0.25rem;
-  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
   color: #d9ecff;
   text-decoration: underline;
   text-underline-offset: 3px;

@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-import { projects, moreProjects } from "../constants";
+import { projects } from "../constants";
 import TitleHeader from "../components/TitleHeader";
 import "../styles/work.css";
 
@@ -21,7 +21,7 @@ const AppShowcase = () => {
       );
 
       gsap.utils
-        .toArray(".project-grid-item, .mini-project-card")
+        .toArray(".project-grid-item")
         .forEach((card, index) => {
           gsap.fromTo(
             card,
@@ -30,7 +30,7 @@ const AppShowcase = () => {
               y: 0,
               opacity: 1,
               duration: 1,
-              delay: 0.1 * (index % 4),
+              delay: 0.2 * index,
               scrollTrigger: {
                 trigger: card,
                 start: "top bottom-=100",
@@ -54,13 +54,6 @@ const AppShowcase = () => {
             <div key={project.number} className="project-grid-item">
               <ProjectCard project={project} />
             </div>
-          ))}
-        </div>
-
-        <h3 className="more-projects-title">More Projects</h3>
-        <div className="more-projects-grid">
-          {moreProjects.map((project) => (
-            <MiniProjectCard key={project.title} project={project} />
           ))}
         </div>
       </div>
@@ -125,18 +118,5 @@ const ProjectLinks = ({ project }) => {
     </div>
   );
 };
-
-const MiniProjectCard = ({ project }) => (
-  <article className="mini-project-card">
-    <h4>{project.title}</h4>
-    <p>{project.description}</p>
-    <ul className="project-stack" aria-label="Tech stack">
-      {project.stack.map((tech) => (
-        <li key={tech}>{tech}</li>
-      ))}
-    </ul>
-    <ProjectLinks project={project} />
-  </article>
-);
 
 export default AppShowcase;

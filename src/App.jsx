@@ -6,6 +6,7 @@ import ShowcaseSection from "./sections/ShowcaseSection";
 import LogoShowcase from "./sections/LogoShowcase";
 import FeatureCards from "./sections/FeatureCards";
 import Education from "./sections/Education";
+import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import Navbar from "./components/NavBar";
 
@@ -19,6 +20,7 @@ const App = () => (
     <FeatureCards />
     <TechStack />
     <Education />
+    <Certifications />
     <Contact />
     <Footer />
   </>

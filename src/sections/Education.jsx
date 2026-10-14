@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import TitleHeader from "../components/TitleHeader";
-import { certifications, education } from "../constants";
+import { education } from "../constants";
 import "../styles/sections.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Education = () => {
   useGSAP(() => {
     gsap.fromTo(
-      ".edu-card, .cert-card",
+      ".edu-card",
       { y: 40, opacity: 0 },
       {
         y: 0,
@@ -30,7 +30,7 @@ const Education = () => {
   return (
     <section id="education" className="flex-center section-padding">
       <div className="w-full h-full md:px-10 px-5">
-        <TitleHeader title="Education" sub="Degrees & Certifications" />
+        <TitleHeader title="Education" sub="Academic Background" />
 
         <div className="edu-grid">
           {education.map((item) => (
@@ -46,30 +46,6 @@ const Education = () => {
             </article>
           ))}
         </div>
-
-        {certifications.length > 0 && (
-          <div className="cert-block">
-            <h3 className="section-subheading">Certifications</h3>
-            <ul className="cert-list">
-              {certifications.map((cert) => (
-                <li key={cert.name} className="card-border cert-card">
-                  <p className="cert-name">{cert.name}</p>
-                  <p className="cert-issuer">{cert.issuer}</p>
-                  {cert.link && (
-                    <a
-                      href={cert.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cert-link"
-                    >
-                      View credential
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </section>
   );

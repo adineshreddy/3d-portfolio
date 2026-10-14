@@ -3,6 +3,7 @@ const navLinks = [
   { name: "Projects", link: "#work" },
   { name: "Skills", link: "#skills" },
   { name: "Education", link: "#education" },
+  { name: "Certifications", link: "#certifications" },
   { name: "Contact", link: "#contact" },
 ];
 
@@ -214,59 +215,6 @@ const projects = [
   },
 ];
 
-const moreProjects = [
-  {
-    title: "Distributed Content-Addressable Storage",
-    description:
-      "Go peer-to-peer storage with SHA-1 deduplication, AES-256 encryption, and automatic peer discovery. Retries, circuit breakers, and automated recovery keep data available through simulated node and network failures.",
-    stack: ["Go", "P2P", "AES-256", "Fault Tolerance"],
-  },
-  {
-    title: "Distributed Payment Processing Platform",
-    description:
-      "Java 21 and Spring Boot 3.5 microservices for payments, orders, auth, products, and users, with Stripe, an API Gateway, Kafka events, JWT/OAuth2 security, and Redis rate limiting for burst traffic.",
-    stack: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Redis"],
-  },
-  {
-    title: "Agentic Multimodal RAG Assistant",
-    description:
-      "A Python/FastAPI agent that answers questions over PDF, DOCX, CSV, and Excel data with semantic retrieval, cross-encoder reranking, table-aware retrieval, session memory, source citations, and web-search fallback.",
-    stack: ["Python", "FastAPI", "RAG", "Vector Search"],
-    github: "https://github.com/adineshreddy/Agentic-Multimodal-RAG",
-  },
-  {
-    title: "Customer Operations CRM Platform",
-    description:
-      "A full-stack CRM unifying 5 customer workflows (customers, deals, tasks, activity, analytics), with domain events automating 6 lifecycle workflows such as follow-ups, approvals, and overdue alerts.",
-    stack: ["React", "Java", "Spring Boot", "PostgreSQL"],
-  },
-  {
-    title: "SyncCanvas - Collaborative Workspace",
-    description:
-      "A real-time collaborative whiteboard with live cursors and JWT auth. Operational-transform conflict resolution with per-room sequencing, verified through 16 automated tests and 500 property-based runs.",
-    stack: ["React", "TypeScript", "Node.js", "WebSockets"],
-  },
-  {
-    title: "CypherTalk - Real-Time Messaging",
-    description:
-      "Multi-user live chat over Socket.IO with MongoDB persistence. Lazy loading and code splitting cut initial page load by 30%; index tuning brought query targeting to a 1.2:1 ratio.",
-    stack: ["React", "Socket.IO", "MongoDB"],
-  },
-  {
-    title: "PixelFlow - Serverless Media Pipeline",
-    description:
-      "Event-driven image processing on AWS Lambda, SQS, and Step Functions: validation, 3-size resizing, watermarking, and CloudFront delivery. 10 MB images processed end to end in 3.2 seconds.",
-    stack: ["Python", "AWS Lambda", "S3", "Step Functions"],
-  },
-  {
-    title: "GPU-Accelerated Scientific Compression",
-    description:
-      "A C++/CUDA and PyTorch compression pipeline optimizing batching, pinned-memory transfers, and prefetching across CPU-GPU paths, benchmarked for memory pressure, I/O, and compression quality.",
-    stack: ["C++", "CUDA", "PyTorch", "Linux"],
-  },
-];
-
-
 const education = [
   {
     school: "University of Florida",
@@ -286,12 +234,14 @@ const certifications = [
   {
     name: "AI Driven Development Lifecycle Foundations",
     issuer: "AWS Knowledge",
-    link: "",
+    badge: "AWS",
+    link: "https://www.credly.com/badges/4df69925-15bf-40ed-9ffe-b1ac977f8a16/public_url",
   },
   {
     name: "Agentic AI Foundations Associate",
     issuer: "Oracle Certified",
-    link: "",
+    badge: "ORCL",
+    link: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=0062EC6B5405A4262905D09B3396EBB4A53F71A4E79022C19E48EB3206BFDBAD",
   },
 ];
 
@@ -312,7 +262,6 @@ export {
   profile,
   skillGroups,
   projects,
-  moreProjects,
   education,
   certifications,
   navLinks,
