@@ -1,5 +1,7 @@
 # Dinesh Ande — Portfolio
 
+**Live:** https://dinesh-ande.vercel.app
+
 Personal portfolio site with an interactive 3D hero scene, showcasing my software engineering experience and projects.
 
 **Stack:** React 19, Vite, Tailwind CSS v4, Three.js (react-three-fiber / drei), GSAP
