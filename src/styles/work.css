@@ -1,0 +1,212 @@
+/* Projects ("work") and experience section styles.
+   Plain, unlayered CSS so it overrides the layered rules in index.css. */
+
+/* ---------- Featured projects ---------- */
+
+.app-showcase .project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+  margin-top: 4rem;
+}
+
+@media (min-width: 1280px) {
+  .app-showcase .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+.app-showcase .project-grid-item {
+  min-width: 0;
+  height: 100%;
+}
+
+.app-showcase .work-project-card {
+  min-height: 0;
+  height: 100%;
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .app-showcase .work-project-card {
+    padding: 2.5rem;
+  }
+}
+
+.app-showcase .work-project-card .project-card-body {
+  margin-top: 2rem;
+  flex: 1;
+}
+
+.app-showcase .work-project-card .project-card-body h2 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 768px) {
+  .app-showcase .work-project-card .project-card-body h2 {
+    font-size: 2.25rem;
+  }
+}
+
+.app-showcase .work-project-card .project-card-body > p {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .app-showcase .work-project-card .project-card-body > p {
+    font-size: 1.125rem;
+  }
+}
+
+.app-showcase .project-metric {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-black-200);
+  border-left: 3px solid #62e0ff;
+  border-radius: 0.5rem;
+  background: rgba(98, 224, 255, 0.06);
+}
+
+.app-showcase .project-metric small {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-blue-50);
+}
+
+.app-showcase .project-metric strong {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .app-showcase .project-metric strong {
+    font-size: 1.375rem;
+  }
+}
+
+.app-showcase .project-card-meta {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.app-showcase .project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.app-showcase .project-stack li {
+  border: 1px solid var(--color-black-50);
+  background: var(--color-black-200);
+  color: var(--color-white-50);
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.app-showcase .project-link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.1rem;
+  border: 1px solid var(--color-white-50);
+  border-radius: 0.5rem;
+  color: var(--color-white-50);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.app-showcase .project-link span {
+  transition: transform 0.3s ease;
+}
+
+.app-showcase .project-link:hover,
+.app-showcase .project-link:focus-visible {
+  background: var(--color-white-50);
+  color: #000;
+}
+
+.app-showcase .project-link:hover span,
+.app-showcase .project-link:focus-visible span {
+  transform: translateX(3px);
+}
+
+/* ---------- Experience ---------- */
+
+.exp-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.exp-highlights li {
+  border: 1px solid var(--color-black-200);
+  background: var(--color-black-50);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.company-panel-brand .company-panel-mark {
+  flex: none;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 768px) {
+  .company-panel-brand .company-panel-mark {
+    font-size: 1rem;
+  }
+}
+
+.company-panel-brand p {
+  overflow-wrap: anywhere;
+}
+
+/* Fit up to 4-character logo text (e.g. "INFY") inside the timeline circle */
+.timeline-logo span {
+  font-size: 0.6rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .timeline-logo span {
+    font-size: 1.05rem;
+  }
+}
+
+.exp-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  margin: 1.25rem 0;
+  color: var(--color-white-50);
+}
+
+.exp-meta-dot {
+  color: var(--color-blue-50);
+}

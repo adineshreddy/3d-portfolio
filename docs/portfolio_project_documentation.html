@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dinesh Reddy Ande Portfolio - Project Documentation</title>
+  <style>
+    @page {
+      size: Letter;
+      margin: 0.75in;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #111827;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.45;
+    }
+
+    h1, h2, h3 {
+      color: #0b2545;
+      line-height: 1.18;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28pt;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      margin: 28px 0 10px;
+      padding-top: 4px;
+      border-top: 1px solid #d8dee9;
+      font-size: 17pt;
+    }
+
+    h3 {
+      margin: 18px 0 7px;
+      font-size: 13pt;
+    }
+
+    p {
+      margin: 0 0 9px;
+    }
+
+    a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+
+    ul, ol {
+      margin-top: 4px;
+      margin-bottom: 10px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    code {
+      font-family: Menlo, Consolas, Monaco, monospace;
+      font-size: 9pt;
+      color: #0f172a;
+    }
+
+    pre {
+      margin: 8px 0 14px;
+      padding: 10px 12px;
+      border: 1px solid #d8dee9;
+      border-radius: 6px;
+      background: #f8fafc;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      font-family: Menlo, Consolas, Monaco, monospace;
+      font-size: 8.4pt;
+      line-height: 1.32;
+    }
+
+    table {
+      width: 100%;
+      margin: 10px 0 14px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th {
+      background: #edf2f7;
+      color: #0b2545;
+      font-weight: 700;
+    }
+
+    th, td {
+      padding: 7px 8px;
+      border: 1px solid #cfd8e3;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+
+    .cover {
+      padding: 28px;
+      border: 1px solid #cfd8e3;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f8fafc, #eaf2ff);
+      margin-bottom: 24px;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      color: #475569;
+      font-size: 13pt;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      margin-top: 20px;
+      color: #334155;
+      font-size: 9.5pt;
+    }
+
+    .callout {
+      margin: 12px 0 16px;
+      padding: 12px 14px;
+      border-left: 4px solid #2563eb;
+      background: #f1f5f9;
+    }
+
+    .small {
+      color: #64748b;
+      font-size: 9pt;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <h1>3D Portfolio Project Documentation</h1>
+    <p class="subtitle">Detailed implementation guide for Dinesh Reddy Ande's React, Vite, Three.js, GSAP, and Tailwind CSS portfolio.</p>
+    <div class="meta">
+      <div><strong>Project:</strong> three-d-portfolio-2025</div>
+      <div><strong>Framework:</strong> React 19 + Vite</div>
+      <div><strong>Primary UI:</strong> Tailwind CSS 4</div>
+      <div><strong>3D Stack:</strong> Three.js, React Three Fiber, Drei</div>
+      <div><strong>Animation:</strong> GSAP + ScrollTrigger</div>
+      <div><strong>Profile:</strong> Backend, cloud, AI/RAG, and full-stack engineering</div>
+    </div>
+  </section>
+
+  <div class="callout">
+    <strong>Purpose of this document:</strong> This guide explains the project from browser entry to final rendered sections. It covers what was implemented, why each file exists, how data flows through the app, and how the portfolio presents Dinesh's resume-based experience, projects, and skills.
+  </div>
+
+  <h2>1. Executive Summary</h2>
+  <p>This project is a single-page interactive 3D portfolio application. It uses Vite as the development/build tool, React as the UI framework, Tailwind CSS for layout and visual styling, GSAP for entrance and scroll-triggered animations, and React Three Fiber/Drei for 3D rendering. The site is personalized around Dinesh Reddy Ande's profile: software engineering experience at Infosys and OneAdvanced, graduate study at the University of Florida, backend systems, cloud infrastructure, and AI/RAG work.</p>
+  <p>The application is intentionally component-based. Each major page area is isolated in a section component, while reusable pieces such as the navbar, buttons, glowing cards, counters, and 3D model cards are placed under <code>src/components</code>. Most profile content is centralized in <code>src/constants/index.js</code>, which makes future editing simpler because text, metrics, experience items, tech-stack labels, and links can be updated without rewriting the section components.</p>
+
+  <h3>Implemented at a glance</h3>
+  <ul>
+    <li>Browser tab branding with Dinesh's name and a custom <code>DR</code> favicon.</li>
+    <li>Responsive navigation with scroll-aware background behavior.</li>
+    <li>Hero section with animated rotating keywords and a 3D room scene.</li>
+    <li>Resume-based counters for experience, transaction scale, API improvement, and ML precision.</li>
+    <li>Text-first project showcase replacing template screenshots with polished project cards.</li>
+    <li>Animated marquee of technical skills.</li>
+    <li>Feature cards that summarize backend, AI/RAG, and cloud delivery strengths.</li>
+    <li>Professional experience timeline with Infosys and OneAdvanced roles.</li>
+    <li>Interactive 3D tech stack cards using GLB models.</li>
+    <li>Footer social links for GitHub, email, and LinkedIn.</li>
+  </ul>
+
+  <h2>2. Technology Stack and Responsibility</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 22%;">Technology</th>
+        <th style="width: 35%;">Where it is used</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vite</td>
+        <td><code>package.json</code>, <code>vite.config.js</code></td>
+        <td>Provides the development server, fast module refresh, and production build pipeline.</td>
+      </tr>
+      <tr>
+        <td>React 19</td>
+        <td><code>src/main.jsx</code>, <code>src/App.jsx</code>, all components</td>
+        <td>Composes the page from reusable section and UI components.</td>
+      </tr>
+      <tr>
+        <td>Tailwind CSS 4</td>
+        <td><code>src/index.css</code></td>
+        <td>Controls spacing, colors, grids, responsive behavior, typography, and component styling.</td>
+      </tr>
+      <tr>
+        <td>GSAP + ScrollTrigger</td>
+        <td><code>Hero.jsx</code>, <code>ShowcaseSection.jsx</code>, <code>Experience.jsx</code>, <code>TechStack.jsx</code>, <code>AnimatedCounter.jsx</code></td>
+        <td>Animates text, counters, cards, timelines, and scroll-based entrances.</td>
+      </tr>
+      <tr>
+        <td>React Three Fiber + Drei</td>
+        <td><code>HeroExperience.jsx</code>, <code>TechIconCardExperience.jsx</code></td>
+        <td>Renders 3D scenes and GLB models inside React components.</td>
+      </tr>
+      <tr>
+        <td>Email/social links</td>
+        <td><code>NavBar.jsx</code>, <code>Footer.jsx</code></td>
+        <td>Provides direct contact and external profile navigation.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Project File Structure</h2>
+  <p>The project follows a familiar Vite React structure. Static files such as images, SVGs, videos, and 3D models live in <code>public</code>. React code lives in <code>src</code>. The app is split into page sections, reusable components, and 3D model components.</p>
+
+  <pre>3d-portfolio/
+├── index.html
+├── package.json
+├── vite.config.js
+├── public/
+│   ├── images/
+│   │   ├── fav.svg
+│   │   └── ...
+│   └── models/
+│       ├── optimized-room.glb
+│       ├── react_logo-transformed.glb
+│       ├── python-transformed.glb
+│       └── ...
+└── src/
+    ├── main.jsx
+    ├── App.jsx
+    ├── index.css
+    ├── constants/index.js
+    ├── components/
+    └── sections/</pre>
+
+  <h2>4. Browser Entry and React Bootstrapping</h2>
+  <p>The browser first loads <a href="../index.html">index.html</a>. This file does not contain the full UI. Instead, it defines a root element and points the browser to <code>src/main.jsx</code>. The title and favicon shown in the browser tab are also configured here.</p>
+
+  <pre>&lt;link rel="icon" type="image/svg+xml" href="/images/fav.svg" /&gt;
+&lt;title&gt;Dinesh Reddy Ande - Portfolio&lt;/title&gt;
+
+&lt;div id="root"&gt;&lt;/div&gt;
+&lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;</pre>
+
+  <p>The React application starts in <a href="../src/main.jsx">src/main.jsx</a>. It imports the global CSS file, imports the main <code>App</code> component, and renders it inside the root div.</p>
+
+  <pre>import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  &lt;StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/StrictMode&gt;,
+)</pre>
+
+  <p>This separation is important: <code>index.html</code> is the shell, while React owns the actual interactive interface after mounting.</p>
+
+  <h2>5. Application Composition</h2>
+  <p>The high-level page structure is in <a href="../src/App.jsx">src/App.jsx</a>. This file works like the master layout for the single-page portfolio. It imports each section and renders them in the order visitors see them.</p>
+
+  <pre>const App = () =&gt; (
+  &lt;&gt;
+    &lt;Navbar /&gt;
+    &lt;Hero /&gt;
+    &lt;ShowcaseSection /&gt;
+    &lt;LogoShowcase /&gt;
+    &lt;FeatureCards /&gt;
+    &lt;Experience /&gt;
+    &lt;TechStack /&gt;
+    &lt;Footer /&gt;
+  &lt;/&gt;
+);</pre>
+
+  <p>Because the page is composed this way, removing a section is simple: remove the import and remove the JSX tag. This was how the contact section and education/project-highlight section were removed from the final page.</p>
+
+  <h2>6. Central Data Model</h2>
+  <p>The file <a href="../src/constants/index.js">src/constants/index.js</a> stores the data used across the site. This includes navigation links, rotating hero words, counters, skill labels, work experience entries, and social links.</p>
+
+  <h3>Navigation data</h3>
+  <pre>const navLinks = [
+  { name: "Projects", link: "#work" },
+  { name: "Experience", link: "#experience" },
+  { name: "Skills", link: "#skills" },
+];</pre>
+
+  <h3>Hero rotating words</h3>
+  <pre>const words = [
+  { text: "Backend", imgPath: "/images/code.svg" },
+  { text: "AI Systems", imgPath: "/images/ideas.svg" },
+  { text: "Cloud APIs", imgPath: "/images/concepts.svg" },
+  { text: "Products", imgPath: "/images/designs.svg" },
+];</pre>
+
+  <h3>Counter metrics</h3>
+  <pre>const counterItems = [
+  { value: 3, suffix: "+", label: "Years of Software Engineering Experience" },
+  { value: 1, suffix: "M+", label: "Peak Daily Transactions Supported" },
+  { value: 70, suffix: "%", label: "API Throughput Improvement" },
+  { value: 98, suffix: "%", label: "ML Crack Detection Precision" },
+];</pre>
+
+  <p>This data-first approach keeps the UI flexible. For example, if Dinesh later wants to add a new job, update a metric, or replace a skill, the change usually starts in <code>constants/index.js</code>.</p>
+
+  <h2>7. Navigation Bar</h2>
+  <p>The navigation bar is implemented in <a href="../src/components/NavBar.jsx">src/components/NavBar.jsx</a>. It has three responsibilities: display the site owner name, render section links from the constants file, and provide a direct email action.</p>
+
+  <pre>const [scrolled, setScrolled] = useState(false);
+
+useEffect(() =&gt; {
+  const handleScroll = () =&gt; {
+    const isScrolled = window.scrollY &gt; 10;
+    setScrolled(isScrolled);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () =&gt; window.removeEventListener("scroll", handleScroll);
+}, []);</pre>
+
+  <p>The scroll listener changes the navbar class between <code>scrolled</code> and <code>not-scrolled</code>. In <a href="../src/index.css">src/index.css</a>, those classes control whether the navbar background is transparent or black.</p>
+
+  <pre>&lt;header className={`navbar ${scrolled ? "scrolled" : "not-scrolled"}`}&gt;
+  ...
+&lt;/header&gt;</pre>
+
+  <p>The email button uses a <code>mailto:</code> link instead of pointing to a removed contact form.</p>
+
+  <pre>&lt;a href="mailto:dineshreddy.ande@ufl.edu" className="contact-btn group"&gt;
+  &lt;div className="inner"&gt;
+    &lt;span&gt;Email me&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/a&gt;</pre>
+
+  <h2>8. Hero Section</h2>
+  <p>The hero section is implemented in <a href="../src/sections/Hero.jsx">src/sections/Hero.jsx</a>. It introduces the portfolio with a large animated headline, an intro sentence, a call-to-action button, a 3D room scene, and the animated counters below.</p>
+
+  <p>The rotating word effect is data-driven. The component maps over the <code>words</code> array and renders each word with an icon. CSS then vertically animates the wrapper to cycle through the words.</p>
+
+  <pre>&lt;h1&gt;
+  Shaping
+  &lt;span className="slide"&gt;
+    &lt;span className="wrapper"&gt;
+      {words.map((word, index) =&gt; (
+        &lt;span key={index} className="flex items-center md:gap-3 gap-1 pb-2"&gt;
+          &lt;img src={word.imgPath} alt="person" /&gt;
+          &lt;span&gt;{word.text}&lt;/span&gt;
+        &lt;/span&gt;
+      ))}
+    &lt;/span&gt;
+  &lt;/span&gt;
+&lt;/h1&gt;</pre>
+
+  <p>The hero text enters with GSAP. The animation starts each headline line lower and transparent, then moves it upward into place while fading it in.</p>
+
+  <pre>gsap.fromTo(
+  ".hero-text h1",
+  { y: 50, opacity: 0 },
+  { y: 0, opacity: 1, stagger: 0.2, duration: 1, ease: "power2.inOut" }
+);</pre>
+
+  <p>The intro paragraph is intentionally width-limited so it aligns visually under the large headline instead of stretching across the screen.</p>
+
+  <pre>.hero-intro {
+  @apply max-w-[28ch] md:max-w-[38ch] xl:max-w-[42ch] leading-relaxed;
+}</pre>
+
+  <h2>9. 3D Hero Scene</h2>
+  <p>The 3D hero scene is implemented in <a href="../src/components/models/hero_models/HeroExperience.jsx">src/components/models/hero_models/HeroExperience.jsx</a>. It uses React Three Fiber's <code>Canvas</code> component to create a WebGL scene inside React.</p>
+
+  <pre>&lt;Canvas camera={{ position: [0, 0, 15], fov: 45 }}&gt;
+  &lt;ambientLight intensity={0.2} color="#1a1a40" /&gt;
+  &lt;OrbitControls
+    enablePan={false}
+    enableZoom={!isTablet}
+    maxDistance={20}
+    minDistance={5}
+    minPolarAngle={Math.PI / 5}
+    maxPolarAngle={Math.PI / 2}
+  /&gt;
+
+  &lt;Suspense fallback={null}&gt;
+    &lt;HeroLights /&gt;
+    &lt;group scale={isMobile ? 0.7 : 1} position={[0, -3.5, 0]}&gt;
+      &lt;Room /&gt;
+    &lt;/group&gt;
+  &lt;/Suspense&gt;
+&lt;/Canvas&gt;</pre>
+
+  <p>The scene adjusts scale based on screen width using <code>react-responsive</code>. On smaller screens, the room is scaled down to avoid cropping. The falling particle layer was removed by deleting the <code>Particles</code> import and the <code>&lt;Particles count={100} /&gt;</code> render call from this file.</p>
+
+  <h2>10. Animated Counter Metrics</h2>
+  <p>The counters are implemented in <a href="../src/components/AnimatedCounter.jsx">src/components/AnimatedCounter.jsx</a>. They display measurable resume highlights and animate when the counter section scrolls into view.</p>
+
+  <pre>gsap.to(numberElement, {
+  innerText: item.value,
+  duration: 2.5,
+  ease: "power2.out",
+  snap: { innerText: 1 },
+  scrollTrigger: {
+    trigger: "#counter",
+    start: "top center",
+  },
+  onComplete: () =&gt; {
+    numberElement.textContent = `${item.value}${item.suffix}`;
+  },
+});</pre>
+
+  <p>The final suffix is applied after the count animation completes. This allows values such as <code>1M+</code>, <code>70%</code>, and <code>98%</code> to appear cleanly.</p>
+
+  <h2>11. Project Showcase</h2>
+  <p>The project section is implemented in <a href="../src/sections/ShowcaseSection.jsx">src/sections/ShowcaseSection.jsx</a>. It was redesigned from screenshot-based cards into text-first case-study cards. This avoids placeholder images and makes the projects feel more intentional.</p>
+
+  <p>Each project is represented by a structured object with a number, title, category label, description, metric, and stack tags.</p>
+
+  <pre>const projects = [
+  {
+    number: "01",
+    title: "Agentic Multimodal RAG Assistant",
+    kicker: "Grounded AI assistant",
+    description:
+      "A local-first chatbot with authenticated document upload, voice input, source-cited chat, session memory, web-search fallback, ChromaDB retrieval, and cross-encoder reranking.",
+    metric: "Source-cited answers",
+    stack: ["FastAPI", "Streamlit", "LangChain", "ChromaDB"],
+  },
+];</pre>
+
+  <p>The first project is rendered as the featured card. Projects 2 and 3 use the same reusable card component but receive a compact class so they can fit in the right column.</p>
+
+  <pre>&lt;ProjectCard project={projects[0]} featured /&gt;
+&lt;ProjectCard project={projects[1]} /&gt;
+&lt;ProjectCard project={projects[2]} /&gt;</pre>
+
+  <p>The reusable card component is simple and expressive. It renders the number and category at the top, project title and description in the body, and metric plus tech tags at the bottom.</p>
+
+  <pre>const ProjectCard = ({ project, featured = false }) =&gt; (
+  &lt;article className={`project-card ${featured ? "featured" : "compact"}`}&gt;
+    &lt;div className="project-card-top"&gt;
+      &lt;span&gt;{project.number}&lt;/span&gt;
+      &lt;p&gt;{project.kicker}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div className="project-card-body"&gt;
+      &lt;h2&gt;{project.title}&lt;/h2&gt;
+      &lt;p&gt;{project.description}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div className="project-card-footer"&gt;
+      &lt;strong&gt;{project.metric}&lt;/strong&gt;
+      &lt;div&gt;
+        {project.stack.map((tech) =&gt; (
+          &lt;span key={tech}&gt;{tech}&lt;/span&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/article&gt;
+);</pre>
+
+  <p>The layout CSS gives project 1 more visual weight and compresses projects 2 and 3 on desktop.</p>
+
+  <pre>.project-list-wrapper {
+  @apply flex md:flex-row flex-col xl:flex-col gap-10 xl:w-[40%] xl:min-h-[38rem];
+}
+
+.project {
+  @apply flex-1 min-h-0;
+}
+
+.project-card.compact {
+  @apply xl:min-h-0 xl:p-7;
+}</pre>
+
+  <h2>12. Skill Marquee</h2>
+  <p>The horizontal skill marquee is implemented in <a href="../src/sections/LogoShowcase.jsx">src/sections/LogoShowcase.jsx</a>. It displays technology names such as Java, Spring Boot, Kafka, Redis, AWS, Azure, React, Python, PyTorch, Docker, and Kubernetes.</p>
+
+  <pre>{logoIconsList.map((icon, index) =&gt; (
+  &lt;LogoIcon key={index} icon={icon} /&gt;
+))}
+
+{logoIconsList.map((icon, index) =&gt; (
+  &lt;LogoIcon key={index} icon={icon} /&gt;
+))}</pre>
+
+  <p>The list is rendered twice so the CSS marquee can scroll continuously without an obvious blank gap. The animation is implemented in <a href="../src/index.css">src/index.css</a>.</p>
+
+  <pre>.marquee-box {
+  display: flex;
+  align-items: center;
+  width: 200%;
+  animation: marquee 60s linear infinite;
+}
+
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: -100%; }
+}</pre>
+
+  <h2>13. Feature Cards</h2>
+  <p>The feature cards are implemented in <a href="../src/sections/FeatureCards.jsx">src/sections/FeatureCards.jsx</a>. They summarize the main strengths of the profile: backend systems at scale, applied AI/RAG, and cloud delivery discipline.</p>
+
+  <pre>{abilities.map(({ imgPath, title, desc }) =&gt; (
+  &lt;div key={title} className="card-border rounded-xl p-8 flex flex-col gap-4"&gt;
+    &lt;div className="size-14 flex items-center justify-center rounded-full"&gt;
+      &lt;img src={imgPath} alt={title} /&gt;
+    &lt;/div&gt;
+    &lt;h3 className="text-white text-2xl font-semibold mt-2"&gt;{title}&lt;/h3&gt;
+    &lt;p className="text-white-50 text-lg"&gt;{desc}&lt;/p&gt;
+  &lt;/div&gt;
+))}</pre>
+
+  <p>The actual text for those cards is stored in <code>abilities</code> inside <code>constants/index.js</code>.</p>
+
+  <h2>14. Work Experience Timeline</h2>
+  <p>The work experience timeline is implemented in <a href="../src/sections/Experience.jsx">src/sections/Experience.jsx</a>. It renders the resume-based experience records from <code>expCards</code> in <code>constants/index.js</code>.</p>
+
+  <p>Each experience entry contains a short review/summary, company name, logo text, role, date, and responsibilities.</p>
+
+  <pre>const expCards = [
+  {
+    review:
+      "Modernized an account opening platform with compliant, event-driven services that improved processing efficiency by 40%.",
+    company: "Infosys",
+    logoText: "INFY",
+    role: "Specialist Programmer L2",
+    date: "July 2024 - August 2025",
+    responsibilities: [
+      "Built microservice architecture with Java, Spring Boot, Kafka, and Redis...",
+      "Improved API throughput by 70%...",
+    ],
+  },
+];</pre>
+
+  <p>The left panel uses <code>GlowCard</code> to show a summary plus a text-based company mark. This replaced the old template company logos.</p>
+
+  <pre>&lt;GlowCard card={card}&gt;
+  &lt;div className="company-panel-brand"&gt;
+    &lt;div className="company-panel-mark"&gt;{card.logoText}&lt;/div&gt;
+    &lt;div&gt;
+      &lt;p&gt;{card.company}&lt;/p&gt;
+      &lt;span&gt;{card.role}&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/GlowCard&gt;</pre>
+
+  <p>The right side renders the company, role, date, and responsibilities in a timeline layout.</p>
+
+  <pre>&lt;p className="text-[#839CB5] font-semibold uppercase tracking-wide"&gt;
+  {card.company}
+&lt;/p&gt;
+&lt;h1 className="font-semibold text-3xl"&gt;{card.role}&lt;/h1&gt;
+&lt;p className="my-5 text-white-50"&gt;{card.date}&lt;/p&gt;
+
+&lt;ul className="list-disc ms-5 mt-5 flex flex-col gap-5 text-white-50"&gt;
+  {card.responsibilities.map((responsibility, index) =&gt; (
+    &lt;li key={index} className="text-lg"&gt;{responsibility}&lt;/li&gt;
+  ))}
+&lt;/ul&gt;</pre>
+
+  <p>Scroll-triggered animations are applied to timeline cards and text blocks using GSAP. The timeline line also scales based on scroll progress, which creates the feeling of moving through career history.</p>
+
+  <pre>gsap.utils.toArray(".timeline-card").forEach((card) =&gt; {
+  gsap.from(card, {
+    xPercent: -100,
+    opacity: 0,
+    transformOrigin: "left left",
+    duration: 1,
+    ease: "power2.inOut",
+    scrollTrigger: {
+      trigger: card,
+      start: "top 80%",
+    },
+  });
+});</pre>
+
+  <h2>15. Glow Card Mechanism</h2>
+  <p>The glow effect is implemented in <a href="../src/components/GlowCard.jsx">src/components/GlowCard.jsx</a>. It tracks the mouse position relative to the card, calculates an angle, and writes that angle into a CSS custom property named <code>--start</code>.</p>
+
+  <pre>const rect = card.getBoundingClientRect();
+const mouseX = e.clientX - rect.left - rect.width / 2;
+const mouseY = e.clientY - rect.top - rect.height / 2;
+
+let angle = Math.atan2(mouseY, mouseX) * (180 / Math.PI);
+angle = (angle + 360) % 360;
+
+card.style.setProperty("--start", angle + 60);</pre>
+
+  <p>The CSS then uses that variable inside a conic gradient mask to create a directional border glow.</p>
+
+  <pre>.card::before {
+  background: var(--gradient);
+  mask: linear-gradient(#0000, #0000),
+    conic-gradient(
+      from calc((var(--start) - 15) * 1deg),
+      #ffffff1f 0deg,
+      white,
+      #ffffff00 100deg
+    );
+  opacity: 0;
+}
+
+.card:hover::before {
+  opacity: 1;
+}</pre>
+
+  <h2>16. 3D Tech Stack Section</h2>
+  <p>The 3D skills section is implemented in <a href="../src/sections/TechStack.jsx">src/sections/TechStack.jsx</a>. It maps over <code>techStackIcons</code> and renders a 3D model card for each skill area.</p>
+
+  <pre>{techStackIcons.map((techStackIcon) =&gt; (
+  &lt;div
+    key={techStackIcon.name}
+    className="card-border tech-card overflow-hidden group xl:rounded-full rounded-lg"
+  &gt;
+    &lt;div className="tech-card-animated-bg" /&gt;
+    &lt;div className="tech-card-content"&gt;
+      &lt;div className="tech-icon-wrapper"&gt;
+        &lt;TechIconCardExperience model={techStackIcon} /&gt;
+      &lt;/div&gt;
+      &lt;div className="padding-x w-full"&gt;
+        &lt;p&gt;{techStackIcon.name}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+))}</pre>
+
+  <p>The model renderer is <a href="../src/components/models/tech_logos/TechIconCardExperience.jsx">src/components/models/tech_logos/TechIconCardExperience.jsx</a>. It loads a GLB model using Drei's <code>useGLTF</code> hook and renders it inside a React Three Fiber canvas.</p>
+
+  <pre>const scene = useGLTF(model.modelPath);
+
+&lt;Canvas&gt;
+  &lt;ambientLight intensity={0.3} /&gt;
+  &lt;directionalLight position={[5, 5, 5]} intensity={1} /&gt;
+  &lt;Environment preset="city" /&gt;
+
+  &lt;Float speed={5.5} rotationIntensity={0.5} floatIntensity={0.9}&gt;
+    &lt;group scale={model.scale} rotation={model.rotation}&gt;
+      &lt;primitive object={scene.scene} /&gt;
+    &lt;/group&gt;
+  &lt;/Float&gt;
+
+  &lt;OrbitControls enableZoom={false} /&gt;
+&lt;/Canvas&gt;</pre>
+
+  <p>The floating motion makes each technology card feel alive without requiring custom animation code for every model.</p>
+
+  <h2>17. Footer and External Links</h2>
+  <p>The footer is implemented in <a href="../src/sections/Footer.jsx">src/sections/Footer.jsx</a>. It reads social link definitions from <code>socialImgs</code> and renders them as anchors.</p>
+
+  <pre>{socialImgs.map((socialImg, index) =&gt; (
+  &lt;a
+    key={index}
+    className="icon"
+    href={socialImg.link}
+    target={socialImg.link.startsWith("mailto:") ? undefined : "_blank"}
+    rel="noreferrer"
+    aria-label={socialImg.name}
+  &gt;
+    &lt;img src={socialImg.imgPath} alt="" /&gt;
+  &lt;/a&gt;
+))}</pre>
+
+  <p>This pattern makes it easy to add or remove links from <code>constants/index.js</code> without changing the footer component.</p>
+
+  <h2>18. Styling System</h2>
+  <p>The main styling lives in <a href="../src/index.css">src/index.css</a>. It imports the Mona Sans font, Tailwind CSS, defines custom theme colors, creates utility classes, and defines component-level styles.</p>
+
+  <pre>@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&amp;display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Mona Sans", sans-serif;
+  --color-white-50: #d9ecff;
+  --color-black-50: #1c1c21;
+  --color-black-100: #0e0e10;
+  --color-black-200: #282732;
+}</pre>
+
+  <p>The file uses Tailwind's <code>@layer</code> feature to create reusable layout utilities and named component styles. For example, the navbar, hero, project cards, timeline, tech cards, and footer all have grouped CSS blocks.</p>
+
+  <pre>@layer utilities {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-5 md:px-10 md:mt-40 mt-20;
+  }
+}</pre>
+
+  <h2>19. Responsiveness</h2>
+  <p>The project handles responsiveness through Tailwind breakpoints and React media queries. Tailwind classes such as <code>md:</code>, <code>xl:</code>, and <code>2xl:</code> change layout, spacing, text size, and card dimensions at different screen widths.</p>
+
+  <p>The hero 3D scene also uses runtime media queries:</p>
+
+  <pre>const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });</pre>
+
+  <p>These values control 3D room scale and whether zoom is enabled for OrbitControls. This prevents the 3D scene from feeling awkward on tablets and mobile devices.</p>
+
+  <h2>20. Run, Build, and Verify</h2>
+  <p>The available npm scripts are defined in <a href="../package.json">package.json</a>.</p>
+
+  <pre>"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "lint": "eslint .",
+  "preview": "vite preview"
+}</pre>
+
+  <h3>Install dependencies</h3>
+  <pre>npm install</pre>
+
+  <h3>Run locally</h3>
+  <pre>npm run dev</pre>
+
+  <p>Vite will start the local development server, usually at:</p>
+
+  <pre>http://localhost:5173</pre>
+
+  <h3>Production build</h3>
+  <pre>npm run build</pre>
+
+  <h3>Preview production build</h3>
+  <pre>npm run preview</pre>
+
+  <h3>Lint check</h3>
+  <pre>npm run lint</pre>
+
+  <h2>21. Important Customizations Already Made</h2>
+  <ul>
+    <li>Updated browser title from the original template name to <code>Dinesh Reddy Ande - Portfolio</code>.</li>
+    <li>Added a custom <code>DR</code> favicon at <code>public/images/fav.svg</code>.</li>
+    <li>Personalized hero text and rotating keywords to match backend, AI, cloud, and product engineering.</li>
+    <li>Removed the contact form section and replaced the navbar contact action with a direct email link.</li>
+    <li>Removed the education/testimonial-style section from the page.</li>
+    <li>Rebuilt project cards as text-first case-study cards without screenshots.</li>
+    <li>Changed work experience company displays from template logos to Infosys and OneAdvanced identity badges.</li>
+    <li>Removed falling particle effects from the hero 3D scene.</li>
+  </ul>
+
+  <h2>22. Recommended Future Improvements</h2>
+  <ol>
+    <li><strong>Add real project links:</strong> Add GitHub/demo links to the project cards once the repositories are public or ready to share.</li>
+    <li><strong>Code-split 3D sections:</strong> The production build warns that the JavaScript chunk is large. Dynamic imports for 3D sections would improve initial load performance.</li>
+    <li><strong>Replace placeholder social icons:</strong> The footer links are correct, but the icon image files are inherited from the template. Replacing them with GitHub/email/LinkedIn-specific SVGs would improve polish.</li>
+    <li><strong>Add accessibility labels:</strong> Some decorative images have empty alt text, which is acceptable, but interactive icons could be made more explicit.</li>
+    <li><strong>Add a resume download button:</strong> A direct PDF resume link could be added to the navbar or hero CTA area.</li>
+    <li><strong>Optimize 3D assets:</strong> GLB models should remain compressed and lightweight to protect page speed.</li>
+  </ol>
+
+  <h2>23. Summary</h2>
+  <p>This portfolio is a modern, interactive single-page site. The app is structured cleanly: <code>App.jsx</code> controls the page order, <code>constants/index.js</code> controls the profile content, section components render visible page areas, and specialized components handle animation, cards, counters, and 3D rendering.</p>
+  <p>The implementation now reflects Dinesh Reddy Ande's actual profile rather than the original template. It emphasizes scalable backend systems, AI/RAG applications, cloud delivery, financial software experience, and selected projects. The result is a portfolio that is visually distinctive while still being maintainable and easy to update.</p>
+
+  <p class="small">Generated for the local project at <code>/Users/dinesh/Project/3d-portfolio</code>.</p>
+</body>
+</html>
