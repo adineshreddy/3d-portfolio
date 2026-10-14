@@ -1,60 +1,51 @@
 import { Environment, Float, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import * as THREE from "three";
 
-const TechIconCardExperience = ({ model }) => {
-  const scene = useGLTF(model.modelPath);
+import JavaLogo from "./JavaLogo";
+import useInView from "../../../hooks/useInView";
+
+const GltfModel = ({ modelPath }) => {
+  const { scene } = useGLTF(modelPath);
 
   useEffect(() => {
-    if (model.modelPath.includes("three.js")) {
-      scene.scene.traverse((child) => {
-        if (child.isMesh) {
-          if (child.name === "Object_5") {
-            child.material = new THREE.MeshStandardMaterial({ color: "white" });
-          }
+    if (modelPath.includes("three.js")) {
+      scene.traverse((child) => {
+        if (child.isMesh && child.name === "Object_5") {
+          child.material = new THREE.MeshStandardMaterial({ color: "white" });
         }
       });
     }
-  }, [model.modelPath, scene]);
+  }, [modelPath, scene]);
+
+  return <primitive object={scene} />;
+};
+
+const TechIconCardExperience = ({ model }) => {
+  const [ref, inView] = useInView();
 
   return (
-    <Canvas>
-      <ambientLight intensity={0.3} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
-      <spotLight
-        position={[10, 15, 10]}
-        angle={0.3}
-        penumbra={1}
-        intensity={2}
-      />
-      <Environment preset="city" />
-
-      {/* 
-        The Float component from @react-three/drei is used to 
-        create a simple animation of the model floating in space.
-        The rotationIntensity and floatIntensity props control the
-        speed of the rotation and float animations respectively.
-
-        The group component is used to scale and rotate the model.
-        The rotation is set to the value of the model.rotation property,
-        which is an array of three values representing the rotation in
-        degrees around the x, y and z axes respectively.
-
-        The primitive component is used to render the 3D model.
-        The object prop is set to the scene object returned by the
-        useGLTF hook, which is an instance of THREE.Group. The
-        THREE.Group object contains all the objects (meshes, lights, etc)
-        that make up the 3D model.
-      */}
-      <Float speed={5.5} rotationIntensity={0.5} floatIntensity={0.9}>
-        <group scale={model.scale} rotation={model.rotation}>
-          <primitive object={scene.scene} />
-        </group>
-      </Float>
-
-      <OrbitControls enableZoom={false} />
-    </Canvas>
+    <div ref={ref} className="w-full h-full">
+      <Canvas dpr={[1, 1.5]} frameloop={inView ? "always" : "never"}>
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[5, 5, 5]} intensity={1} />
+        <Suspense fallback={null}>
+          <Environment preset="city" />
+          {/* Float animates the model bobbing and rotating in place */}
+          <Float speed={5.5} rotationIntensity={0.5} floatIntensity={0.9}>
+            <group scale={model.scale} rotation={model.rotation}>
+              {model.component === "java" ? (
+                <JavaLogo />
+              ) : (
+                <GltfModel modelPath={model.modelPath} />
+              )}
+            </group>
+          </Float>
+        </Suspense>
+        <OrbitControls enableZoom={false} />
+      </Canvas>
+    </div>
   );
 };
 

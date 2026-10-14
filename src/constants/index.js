@@ -85,9 +85,9 @@ const skillGroups = [
 const techStackIcons = [
   {
     name: "Java, Spring Boot & Kafka Microservices",
-    modelPath: "/models/node-transformed.glb",
-    scale: 5,
-    rotation: [0, -Math.PI / 2, 0],
+    component: "java",
+    scale: 0.045,
+    rotation: [0, 0, 0],
   },
   {
     name: "Python, FastAPI & RAG Pipelines",

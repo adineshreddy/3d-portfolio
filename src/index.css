@@ -5,18 +5,31 @@
   --gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
-  width: 100dvw;
-  overflow-x: hidden;
+  width: 100%;
   background-color: black;
   color: white;
-  scroll-behavior: smooth;
   font-family: "Mona Sans", sans-serif;
 }
 
+/* clip (unlike hidden) doesn't turn body into its own scroll container */
+body {
+  overflow-x: clip;
+}
+
 section {
-  width: 100dvw;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 @theme {
@@ -413,7 +426,7 @@ section {
 
 /* marquee */
 .marquee {
-  width: 100dvw;
+  width: 100%;
   overflow: hidden;
   position: relative;
 }
@@ -425,6 +438,7 @@ section {
   position: absolute;
   overflow: hidden;
   animation: marquee 60s linear infinite;
+  will-change: transform;
 }
 .marquee-item {
   float: left;
@@ -480,7 +494,6 @@ section {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  filter: blur(10px);
   filter: saturate(200);
 }
 
